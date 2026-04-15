@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8">
+        <title>Remover fondo</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="{{ url_for('static', filename='estilos_fondo.css') }}">
+        <link rel="icon" type="image/png" href="{{ url_for('static', filename='icono2.png') }}">
+        <body>
+    </head>
+        
+        <header class="header_titulo ">
+            <h1>Remover fondo de una imagen con IA</h1>
+        </header>
+
+        {%if not imagen_b64%}
+        <div class="caja_formulario">
+                <img src="{{ url_for('static', filename='panel_imagen.png') }}" alt="Remover fondo IA" class="img_izquierda"> 
+            <form  class="formulario" action="/" method="POST" enctype="multipart/form-data">
+                <h2 class="formulario_title" >Seleccione una imagen</h2>
+                <p>Sube una imagen para eliminar su fondo utilizando inteligencia artificial.</p>
+                <label class="formulario_label" for="imagen">Seleccionar archivo... </label>
+                <input id="imagen" type="file" name="imagen" required>
+                <button class="formulario_btn_quitar" type="submit">Quitar fondo</button>
+            </form>
+
+        <img src="{{ url_for('static', filename='panel_derecho.png') }}" alt="Remover fondo IA" class="img_derecha">
+        </div>
+        {% else %}
+
+        <div class="caja_resultado">
+        <h2 class="title2">Imagen sin Fondo</h2>
+        <img class="img_resultado" src="data:image/png;base64,{{ imagen_b64 }}" alt="Sin fondo">
+
+            <div class="caja_botones">
+        <a href="data:image/png;base64,{{ imagen_b64 }}" download="imagen_sin_fondo.png">
+            <button class="formulario_btn_descargar" type="button">⬇Descargar Imagen</button>
+        </a>
+
+        <a href="/">
+                <button type="button">Subir otra imagen</button>
+            </a>
+            </div>
+        </div>
+        {% endif %}
+
+        <footer>
+        <p>&copy; 2025 Desarrollado por <strong>Nelson Dev</strong></p>
+        </footer>
+
+
+
+    </body>
+</html>
